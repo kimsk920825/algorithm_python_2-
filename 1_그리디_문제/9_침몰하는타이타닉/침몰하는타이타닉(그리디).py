@@ -47,5 +47,3 @@ while True:
             weights.remove(weight)
             cnt += 1
 print(cnt)
-
-##방법2##
