@@ -33,4 +33,4 @@ while sum_value + ((q[0][0] - previous) * length) < k:
 result = sorted(q, key=lambda x: x[1])
 # 음식 번호를 기준으로 정렬
 print(result[(k - sum_value) % length][1])
-# 다음에 해석
+# 길이 나누기 (네트워크 끊키는시간 - 음식을 먹는데 걸린 시간) 인덱스에서 음식 번호
