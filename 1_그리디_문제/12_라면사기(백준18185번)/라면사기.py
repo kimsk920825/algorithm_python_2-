@@ -42,3 +42,4 @@ for i in range(number - 2):
         data[i] -= m
         data[i + 1] -= m
         data[i + 2] -= m
+    
