@@ -1,4 +1,4 @@
-name = "JZA"
+name = "AACAAB"
 
 
 def solution(name):
@@ -11,6 +11,8 @@ def solution(name):
     backward = []
     move_to_right = 1
     reverse_name = ""
+    check_rA = []
+    check_lA = []
     # 2. 정방향 알파벳별 변호, 반대방향 알파벳별 번호 각 각 매기고 리스트
     for f in range(66, 91):
         forward.append((f - 65, chr(f)))
@@ -30,7 +32,14 @@ def solution(name):
             r_result += min(check_0, check_1)
     r_result += len(name) - 1
     if name[-1] == "A":
-        r_result -= 1
+        reverse_chr = "".join(reversed(name))
+        for i in reverse_chr:
+            if i == "A":
+                check_rA.append(i)
+            else:
+                break
+
+    r_result -= len(check_rA)
 
     # 4. 왼쪽방향
     if name[0] == "A":
@@ -44,6 +53,7 @@ def solution(name):
                 check_1 = backward[i][0]
         l_result += min(check_0, check_1)
     l_result += 1
+
     reverse_name = "".join(reversed(name))
     reverse_name = reverse_name[:-1]
 
@@ -58,9 +68,22 @@ def solution(name):
                 if name_i == backward[i][1]:
                     check_1 = backward[i][0]
             l_result += min(check_0, check_1)
+
     l_result += len(reverse_name) - 1
     if reverse_name[-1] == "A":
-        l_result -= 1
+        reverse_chr = "".join(reversed(reverse_name))
+        for i in reverse_chr:
+            if i == "A":
+                check_lA.append(i)
+            else:
+                break
+
+    l_result -= len(check_lA)
     answer = min(r_result, l_result)
 
     return answer
+
+
+if __name__ == "__main__":
+    a = solution(name)
+    print(a)
