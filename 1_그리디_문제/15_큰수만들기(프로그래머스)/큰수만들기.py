@@ -22,7 +22,7 @@ while True:
     mx_i = 0
     # 3)만약 len(data[f_index:]) == len(data) - (-1*(-k+b_index)) answer에 data[f_index:]의 데이터값 저장
     if len(data[f_index:]) == b_index:  # <-- 5월 24일 화요일: 논리가 맞는지 확인하기.
-        # 5월 25일 기록: 5월 24일 전체 길이 - (-1 * (-k + b_index))는 틀림
+        # 5월 25일 기록: 5월 24일 전체 길이 - (-1 * (-k + b_index))는 틀
         # 이유: (-1 * (-k + b_index)는 뒤에서 앞쪽으로 몇개가 남았냐를 카운팅하는 수식.
         # f_index부터 남은 데이터가 뒤에서 앞쪽으로 몇개남았느냐와 같을때 남은데이터를 answer에 누적시키는게 맞음.
         # 5월 25일 기록: (-1 * (-k + b_index) --> len(n)-k-1-len(answer)
