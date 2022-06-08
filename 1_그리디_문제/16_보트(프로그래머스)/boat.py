@@ -22,23 +22,38 @@
 #             break
 
 #     return answer
+# def solution(people, limit):
+#     answer = 0
+#     # 보트에 탈 사람이 있는 경우에만 while 반복
+#     while people:
+#         # 무리에서 한명을 뽑아라
+#         temp = people.pop()
+#         # 배에 temp를 태우고 남는 무게를 구하여라
+#         temp_spare = limit - temp
+#         # 남는 여유 무게보다 작은 숫자들을 가려내라
+#         temp2 = list(filter(lambda x: x <= temp_spare, people))
+#         # 만약 남는 여유 무게보다 작은 숫자들이 있다면
+#         if temp2:
+#             # 그 중 가장 큰 수를 뽑고
+#             max_data = max(temp2)
+#             # 해당 무게를 peopled에서 지워라
+#             people.remove(max_data)
+#         answer += 1
+
+#     return answer
+
+
 def solution(people, limit):
     answer = 0
-    # 보트에 탈 사람이 있는 경우에만 while 반복
-    while people:
-        # 무리에서 한명을 뽑아라
-        temp = people.pop()
-        # 배에 temp를 태우고 남는 무게를 구하여라
-        temp_spare = limit - temp
-        # 남는 여유 무게보다 작은 숫자들을 가려내라
-        temp2 = list(filter(lambda x: x <= temp_spare, people))
-        # 만약 남는 여유 무게보다 작은 숫자들이 있다면
-        if temp2:
-            # 그 중 가장 큰 수를 뽑고
-            max_data = max(temp2)
-            # 해당 무게를 peopled에서 지워라
-            people.remove(max_data)
+    people.sort()
+    i = 0
+    j = len(people) - 1
+
+    while i <= j:
         answer += 1
+        if people[i] + people[j] <= limit:
+            i += 1
+        j -= 1
 
     return answer
 
