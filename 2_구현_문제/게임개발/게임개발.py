@@ -1,31 +1,51 @@
 import sys
 
 sys.stdin = open("input.txt", "r")
-n, m = input().split()
-a, b, d = input().split()
-a = int(a)
-b = int(b)
-d = int(d)
+
+n, m = map(int, input().split())
+a, b, d = map(int, input().split())
 geo = []
-for _ in range(int(n)):
-    geo.append(list(input().split()))
-print(geo[a][b])
+for _ in range(n):
+    geo.append(list(map(int, input().split())))
+check = [[0] * m for _ in range(n)]
+check[a][b] = 1
+
 ############################데이터 입력 완료############################
-# 북,서,남,동
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-# 캐릭터가 보고있는 방향 북,동,남,서
-news = [0, 1, 2, 3]
-# 캐릭터 왼쪽으로 돌기
-d = d - 1
-if d == -1:
-    d = 3
-# 왼쪽으로 돌았을 때 해당 방향이 1인지 아닌지 확인하기.
-##왼쪽으로 돌았을때 방향이 0이라면 geo[a+dx[0],[b]+dy[0]]
-if d == 0:
-    if geo[a + dx[0], [b] + dy[0]] == 1 or geo[a + dx[0], [b] + dy[0]] == 2:
-        pass
-    if geo[a + dx[0], [b] + dy[0]] == 0:
-        geo[a][b] = 2
-        a = a + dx[0]
-        b = b + dy[0]
+# 북,동,남,서
+da = [-1, 0, 1, 0]
+db = [0, 1, 0, -1]
+
+# 캐릭터 왼쪽으로 돌기 --> 함수로 바꾸기
+def turn_left():
+    global d
+    d = d - 1
+    if d == -1:
+        d = 3
+
+
+# 4방향을 돌고, 갈 공간이 없을 때 뒤로 갈려고 하나 뒤에도 바다일 떄 멈춤. 아니라면 계속
+count = 1
+turn_time = 0
+while True:
+    turn_left()
+    na = a + da[d]
+    nb = b + db[d]
+    if geo[na][nb] == 0 and check[na][nb] == 0:
+        check[na][nb] = 1
+        a = na
+        b = nb
+        count += 1
+        turn_time = 0
+        continue
+    else:
+        turn_time += 1
+    if turn_time == 4:
+        na = a - da[d]
+        nb = b - db[d]
+        if geo[na][nb] == 0:
+            a = na
+            b = nb
+        else:
+            break
+        turn_time = 0
+print(count)
